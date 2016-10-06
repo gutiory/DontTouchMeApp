@@ -8,7 +8,7 @@ android.Plugin.androidBuild
 // SDK version target
 platformTarget in Android := "android-21"
 
-dexMaxHeap in Android := "1500m"
+dexMaxHeap in Android := "3000m"
 
 run <<= run in Android
 
@@ -20,12 +20,14 @@ scalaVersion := "2.11.6"
 //crossScalaVersions ++= Seq("2.11.0", "2.11.6")
 
 resolvers += "jcenter" at "http://jcenter.bintray.com"
-resolvers += "MPAndroidChart" at "https://jitpack.io"
-resolvers += "mvessel" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
+resolvers += "MPAndroidChart" at "https://jitpack.io"
+
+resolvers += "mvessel" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
 javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 scalacOptions ++= Seq("-feature", "-deprecation", "-target:jvm-1.7")
+
 
 libraryDependencies ++= Seq(
   "com.fortysevendeg" %% "mvessel-android" % "0.2-SNAPSHOT",
@@ -33,7 +35,9 @@ libraryDependencies ++= Seq(
   aar("com.android.support" % "support-v4" % "21.0.0"),
   aar("com.github.PhilJay" % "MPAndroidChart" % "v2.2.3"),
   "com.typesafe.slick" %% "slick" % "3.1.1",
-  "org.slf4j" % "slf4j-nop" % "1.6.4"
+  "org.slf4j" % "slf4j-nop" % "1.6.4",
+  //"com.mcxiaoke.volley" % "library" % "1.0.0"
+  aar("com.loopj.android" % "android-async-http" % "1.4.9")
 )
 
 
@@ -54,5 +58,15 @@ proguardOptions in Android ++= Seq(
   "-keep class scala.Dynamic",
   "-keep class scala.concurrent.ExecutionContext",
   "-keep class com.fortysevendeg.mvessel.AndroidDriver",
-  "-keep class slick.driver.SQLiteDriver"
+  "-keep class slick.driver.SQLiteDriver",
+  "-keep class cz.msebera.android.httpclient",
+  "-keep class com.loopj.android",
+  "-keep interface com.loopj.android"
+)
+
+proguardCache in Android ++= Seq(
+  "android.support",
+  "macroid",
+  "slick",
+  "android-async-http"
 )

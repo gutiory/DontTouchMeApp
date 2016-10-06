@@ -56,7 +56,7 @@ class MainActivity extends Activity with Contexts[Activity] with Layouts{
     }
 
     // TODO: Lo dejo en TBD.
-    startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
+    //startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
 
     //serviceIntent.setAction()
     startService(serviceIntent)
